@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oval | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <style>
+        
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            scroll-behavior:smooth;
+        }
+
+        body{
+            font-family:'Poppins',sans-serif;
+            background:linear-gradient(to bottom right,#0f172a,#111827,#020617);
+            color:white;
+            overflow-x:hidden;
+        }
+
+        body::-webkit-scrollbar{
+            width: 8px;
+        }
+
+        body::-webkit-scrollbar-thumb{
+            background:#444;
+            border-radius:10px;
+        }
+
+        .grain{
+            position:fixed;
+            inset:0;
+            background-image:url('https://www.transparenttextures.com/patterns/asfalt-light.png');
+            opacity:0.05;
+            pointer-events:none;
+            z-index:1;
+        }
+
+        /* NAVIGATION BAR */
+
+        nav{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            padding:30px 50px;
+           display:flex;
+           justify-content:space-between;
+           align-items:center;
+           z-index:1000;
+           backdrop-filter:blur(12px);
+           background:rgba(17,24,39,0.45);
+        }
+
+        .logo{
+            font-size:20px;
+            font-weight:700;
+            letter-spacing:1px;
+            color:white;
+        }
+        .nav-links{
+            display:flex;
+            gap:35px;
+        }
+        
+        .nav-links button{
+            background:transparent;
+            border:none;
+            color:white;
+            font-size:14px;
+            letter-spacing:2px;
+            text-transform:uppercase;
+            cursor:pointer;
+            position:relative;
+            font-family:'Poppins',sans-serif;
+        }
+        
+        .nav-links button::after{
+            content:'';
+            position:absolute;
+            left:0;
+            bottom:-6px;
+            width:0;
+            height:1px;
+            background:white;
+            transition:0.3s ease;
+        }
+        
+        .nav-links button:hover::after{
+            width:100%;
+        }
+        
+        /* HERO */
+        
+        .hero{
+            min-height:100vh;
+            padding:180px 8% 100px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            position:relative;
+            z-index:2;
+        }
+        
+        .hero-content{
+            width:100%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:80px;
+        }
+        
+        .left-text{
+            max-width:650px;
+        }
+        
+        .left-text h1{
+            font-size:clamp(60px,10vw,160px);
+            line-height:0.9;
+            text-transform:uppercase;
+            font-weight:800;
+            margin-bottom:20px;
+        }
+        
+        .left-text p{
+            color:white;
+            font-size:18px;
+            line-height:1.8;
+            max-width:500px;
+            text-align:justify;
+        }
+        
+        .hero-circle{
+            width:420px;
+            height:420px;
+            border-radius:50%;
+            overflow:hidden;
+            animation:float 5s ease-in-out infinite;
+            flex-shrink:0;
+            border:3px solid rgba(255,255,255,0.15);
+            box-shadow:0 0 40px rgba(255,255,255,0.08);
+        }
+        
+        .hero-circle img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+        
+        @keyframes float{
+            0%,100%{
+                transform:translateY(0px);
+            }
+            
+            50%{
+                transform:translateY(-20px);
+            }
+        }
+        
+        /* SECTION */
+        
+        .section{
+            padding:120px 8%;
+            position:relative;
+            z-index:2;
+        }
+        
+        .section-title{
+
+            font-size:15px;
+            text-transform:uppercase;
+            letter-spacing:3px;
+            color:white;
+            margin-bottom:50px;
+        }
+
+        /* ABOUT */
+
+        .about{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:80px;
+            align-items:center;
+        }
+        
+        .about-image img{
+            width:100%;
+            border-radius:30px;
+            object-fit:cover;
+        }
+        
+        .about-text h2{
+            font-size:clamp(45px,6vw,90px);
+            line-height:1;
+            margin-bottom:30px;
+        }
+        
+        .about-text p{
+            color:white;
+            line-height:2;
+            font-size:17px;
+            margin-bottom:20px;
+            text-align:justify;
+        }
+
+        /* EDUCATION */
+
+        .education-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+            gap:35px;
+        }
+
+        .education-card{
+            background:white;
+            color:#111827;
+            border-radius:30px;
+            padding:35px 28px;
+            transition:0.4s ease;
+            display:flex;
+            flex-direction:column;
+            justify-content:space-between;
+            min-height:500px;
+        }
+
+        .education-card:hover{
+            transform:translateY(-10px);
+            box-shadow:0 20px 40px rgba(0,0,0,0.35);
+        }
+
+        .education-top{
+            text-align:center;
+        }
+
+        .education-top img{
+            width:190px;
+            height:190px;
+            object-fit:contain;
+            margin-bottom:20px;
+        }
+
+        .education-top h3{
+            font-size:22px;
+            margin-top:-30px;
+            margin-bottom:10px;
+            line-height:1.4;
+        }
+        
+        .education-top span{
+            display:block;
+            font-size:15px;
+            font-weight:500;
+            margin-bottom:20px;
+        }
+        
+        .education-card p{
+            line-height:1.9;
+            font-size:15px;
+            text-align:justify;
+            margin-bottom:30px;
+        }
+        
+        .education-btn{
+            margin-top:auto;
+            display:flex;
+            justify-content:center;
+        }
+        
+        .education-btn a{
+            text-decoration:none;
+            color:#111827;
+            border:2px solid #111827;
+            padding:12px 40px;
+            border-radius:100px;
+            transition:0.3s ease;
+            font-size:15px;
+        }
+        
+        .education-btn a:hover{
+            background:#111827;
+            color:white;
+        }
+
+        /* PROJECTS */
+        
+        .projects{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+            gap:35px;
+        }
+
+        .project-link{
+            text-decoration:none;
+            color:inherit;
+            display:block;
+        }
+        
+        .project-card{
+            position:relative;
+            overflow:hidden;
+            border-radius:25px;
+            cursor:pointer;
+            background:#111;
+            transition:0.4s ease;
+            border:1px solid rgba(255,255,255,0.08);
+        }
+        
+        .project-card:hover{
+            transform:translateY(-10px);
+            box-shadow:0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .project-image{
+            height:450px;
+            overflow:hidden;
+        }
+        
+        .project-image img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            transition:0.6s ease;
+        }
+        
+        .project-card:hover img{
+            transform:scale(1.08);
+        }
+        
+        .project-info{
+            position:absolute;
+            bottom:0;
+            left:0;
+            width:100%;
+            padding:25px;
+            background:linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+        }
+        
+        .project-info h2{
+            font-size:28px;
+            margin-bottom:8px;
+        }
+        
+        .project-info p{
+            color:white;
+            font-size:15px;
+            line-height:1.6;
+            text-align:justify;
+        }
+
+        /* CONTACT */
+        
+        .contact{
+            text-align:center;
+            padding-bottom:140px;
+            min-height:70vh;
+            position:relative;
+            z-index:1001;
+        }
+        
+        .contact h2{
+            font-size:clamp(35px,8vw,100px);
+            margin-bottom:40px;
+            text-transform:uppercase;
+        }
+        
+        .socials{
+            display:flex;
+            justify-content:center;
+            gap:25px;
+            flex-wrap:wrap;
+            margin-top:40px;
+            position:relative;
+            z-index:1001;
+        }
+        
+        .socials a{
+            display:inline-block;
+            color:white;
+            text-decoration:none;
+            border:1px solid rgba(255,255,255,0.15);
+            padding:18px 35px;
+            border-radius:100px;
+            transition:0.35s ease;
+            font-size:15px;
+            letter-spacing:1px;
+        }
+        
+        .socials a:hover{
+            background:white;
+            color:black;
+            transform:translateY(-5px);
+        }
+        
+        /* REVEAL */
+
+        .reveal{
+            opacity:0;
+            transform:translateY(80px);
+            transition:1s ease;
+        }
+
+        .reveal.active{
+            opacity:1;
+            transform:translateY(0);
+        }
+
+        /* RESPONSIVE */
+        
+        @media(max-width:1000px){
+            
+            .hero-content,
+            .about{
+                display:grid;
+                grid-template-columns:1fr;
+                gap:60px;
+            }
+            
+            .hero-circle{
+                width:320px;
+                height:320px;
+                margin:auto;
+            }
+            
+            nav{
+                padding:25px;
+            }
+            
+            .nav-links{
+                gap:15px;
+            }
+            
+            .left-text h1{
+                font-size:80px;
+            }
+        }
+        
+        @media(max-width:700px){
+
+
+            nav{
+                flex-direction:column;
+                gap:20px;
+            }
+            
+            .hero{
+                padding-top:220px;
+            }
+    
+            .left-text h1{
+                font-size:55px;
+            }
+
+            .hero-circle{
+                width:260px;
+                height:260px;
+            }
+
+            .projects{
+                grid-template-columns:1fr;
+            }
+            
+            .project-image{
+                height:350px;
+            }
+
+            .contact h2{
+                font-size:50px;
+            }
+
+            .socials{
+                gap:15px;
+            }
+
+            .socials a{
+                width:100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="grain"></div>
+    
+    <nav>
+        
+        <div class="logo">RODGE OVAL | CREATIVE PORTFOLIO</div>
+        <div class="nav-links">
+            <button onclick="scrollToSection('about')">About</button>
+            <button onclick="scrollToSection('project')">Projects</button>
+            <button onclick="scrollToSection('contact')">Contact</button>
+        </div>
+    </nav>
+     
+    <section class="hero">
+
+        <div class="hero-content reveal">
+    
+            <div class="left-text">
+                <h1>User Interface<br>Designer</h1>
+
+                <p>
+                    I am really interested in how technology and creativity can work together; this has inspired my desire to become a professional UI/UX Designer, creating user-friendly products so that technology becomes easy to use for all.
+                </p>
+            </div>
+            
+            <div class="hero-circle">
+                <img src="main.jpg" alt="Profile">
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="about">
+
+
+        <div class="about reveal">
+
+            <div class="about-image">
+    
+                <img src="rodge.png" alt="About Image">
+
+            </div>
+
+            <div class="about-text">
+
+                <h2>About Me</h2>
+
+                <p>
+    
+                    Rodge Mikalah E. Oval is a 20 years old full-time 2nd-year college student at National University-MOA.
+                    She took an undergraduate program, Bachelor of Science in Information Technology with specialization in Mobile and Web Applications.
+                </p>
+                
+                <p>
+                    I am the oldest daughter, niece, and granddaughter in our family. Information Technology was my last choice when I was deciding what course to take in college last 2024; however, I have always been fond of gadgets, and I find myself amazed whenever I come across things that make use of technology.
+                    I am learning Java, JavaScript, and CSS as these are the programming languages that our professor teaches us during class discussions.
+                </p>
+            </div>
+        </div>
+         
+        <div style="margin-top:120px;">
+
+            <p class="section-title reveal">Educational Background</p>
+            
+            <div class="education-grid">
+                
+                <div class="education-card reveal">
+
+                    <div class="education-top">
+
+                        <img src="KJCSI.png" alt="Kumdan Jungang Christian School">
+
+        
+                        <h3>Kumdan Jungang Christian School, Inc.</h3>
+                        
+                        <span>Grade 1 - Grade 7</span>
+                    
+                    </div>
+                    
+                    <p>
+        
+                        I studied at Kumdan Jungang Christian School, Inc. from Grade 1 to Grade 7.
+                        They offered me a chance to study in South Korea after Junior High School, but I declined due to some personal reasons.
+                    </p>
+                    
+                    <div class="education-btn">
+                        <a href="https://bccsi2002.wixsite.com/kjcsi" target="_blank">Contact Us</a>
+                    </div>
+                </div>
+                
+                <div class="education-card reveal">
+                    
+                    <div class="education-top">
+                        <img src="CALA.png" alt="CALA Institute">
+                        
+                        <h3>CALA Institute of the Philippines, Inc.</h3>
+                
+                        <span>Grade 8 - Grade 12</span>
+                    
+                    </div>
+                    
+                    <p>
+                        In 2019, we moved to Cavite because my parents bought a house there.
+                        So, I transferred to CALA Institute of the Philippines, Inc., from grade 8 until I graduated in grade 12 as a consistent honor student.
+                    </p>
+                    
+                    <div class="education-btn">
+        
+                        <a href="https://www.facebook.com/CALATanza" target="_blank">Contact Us</a>
+    
+                    </div>
+                
+                </div>
+                
+                <div class="education-card reveal">
+                    
+                    <div class="education-top">
+                        
+                        <img src="NU.png" alt="National University">
+                        
+                        <h3>National University - Mall of Asia</h3>
+                        
+                        <span>1<sup>st</sup> Year - Present</span>
+                    </div>
+                    
+                    <p>
+                        I am currently studying at National University - MOA, taking up an undergraduate program, Bachelor of Science in Information Technology
+                        with specialization in Mobile and Web Applications. I also became a dean's lister during my 1<sup>st</sup> and 2<sup>nd</sup> year (1st term).
+                    </p>
+                    
+                    <div class="education-btn">
+                        <a href="https://www.national-u.edu.ph/nu-moa/contact-us/" target="_blank">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="project">
+
+        <p class="section-title reveal">
+    
+            Sample Designs for Web and Mobile Projects
+
+        </p>
+
+        <div class="projects">
+
+            <a href="nu-irs.html" target="_blank" class="project-link">
+
+                <div class="project-card reveal">
+
+                    <div class="project-image">
+        
+                        <img src="Logo_NU-IRS.png" alt="NU-IRS">
+        
+                    </div>
+
+                    <div class="project-info">
+        
+                        <h2>NU-IRS</h2>
+
+                        <p>
+                            The NU-IRS Lost & Found Application is a digital system designed to handle and categorize reports of lost and found items on the National University - MOA Campus.
+                        </p>
+        
+                    </div>
+                </div>
+            </a>
+            
+            <a href="PAYBEELZzz.html" target="_blank" class="project-link">
+
+                <div class="project-card reveal">
+        
+                    <div class="project-image">
+        
+                        <img src="PAYBEELZzz.png" alt="PAYBEELZzz">
+        
+                    </div>
+          
+                    <div class="project-info">
+        
+                        <h2>PAYBEELZzz</h2>
+            
+                        <p>
+                            The PAYBEELZzz Queueing Management System (QMS) is a system that manages the flow of money and accounts and thus, convenient in face to face transactions.
+                        </p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="GMC.html" target="_blank" class="project-link">
+            
+                <div class="project-card reveal">
+                    
+                    <div class="project-image">
+    
+                        <img src="Gryffindor.png" alt="Gryffindor Medical Center">
+    
+                    </div>
+
+                    <div class="project-info">
+        
+                        <h2>Gryffindor Medical Center</h2>
+                    
+                        <p>
+                            Gryffindor Medical Center is a healthcare management system designed to streamline patient records, appointments, and medical services efficiently.
+                        </p>
+            
+                    </div>
+        
+                </div>
+       
+            </a>
+
+        </section>
+
+        <section class="section contact" id="contact">
+            
+            <p class="section-title reveal">Contact</p>
+            
+            <h2 class="reveal">DM ME TO KNOW ME BETTER</h2>
+            
+            <div class="socials reveal">
+                <a href="https://www.facebook.com/rodgee.oval" target="_blank">Facebook</a>
+                <a href="https://www.instagram.com/rm.ovl" target="_blank">Instagram</a>
+                <a href="https://www.linkedin.com/in/rodge-mikalah-oval/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/rodgeoval" target="_blank">GitHub</a>
+                <a href="mailto:ovalrodgemikalah@gmail.com">Email</a>
+            </div>
+        </section>
+    
+    <script>
+    
+        function scrollToSection(id){
+            document.getElementById(id).scrollIntoView({
+                behavior:'smooth'
+            });
+        }
+        
+        const reveals = document.querySelectorAll('.reveal');
+    
+        function revealOnScroll(){
+        
+            reveals.forEach((element)=>{
+                const windowHeight = window.innerHeight;
+                const revealTop = element.getBoundingClientRect().top;
+                const revealPoint = 50;
+                
+                if(revealTop < windowHeight - revealPoint){
+                    
+                    element.classList.add('active');
+                
+                } else {
+                    element.classList.remove('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+        revealOnScroll();
+
+    </script>
+    
+</body>
+</html>

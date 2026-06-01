@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GMC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            scroll-behavior:smooth;
+        }
+        
+        body{
+            font-family:'Poppins',sans-serif;
+            background:#111827;
+            color:white;
+            overflow-x:hidden;
+        }
+        
+        body::-webkit-scrollbar{
+            width:8px;
+        }
+        
+        body::-webkit-scrollbar-thumb{
+            background:#444;
+            border-radius:10px;
+        }
+        
+        .grain{
+            position:fixed;
+            inset:0;
+            background-image:url('https://www.transparenttextures.com/patterns/asfalt-light.png');
+            opacity:0.05;
+            pointer-events:none;
+            z-index:999;
+        }
+        
+        nav{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            padding:30px 50px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            z-index:1000;
+        }
+        
+        .logo{
+            font-size:20px;
+            font-weight:700;
+            letter-spacing:1px;
+            color:white;
+        }
+        
+        .nav-links{
+            display:flex;
+            gap:35px;
+        }
+        
+        .nav-links button{
+            background:transparent;
+            border:none;
+            color:white;
+            font-size:14px;
+            letter-spacing:2px;
+            text-transform:uppercase;
+            cursor:pointer;
+            position:relative;
+        }
+        
+        .nav-links button::after{
+            content:'';
+            position:absolute;
+            left:0;
+            bottom:-6px;
+            width:0;
+            height:1px;
+            background:white;
+            transition:0.3s ease;
+        }
+        
+        .nav-links button:hover::after{
+            width:100%;
+        }
+        
+        .hero{
+            min-height:100vh;
+            padding:180px 8% 100px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        
+        .hero-content{
+            width:100%;
+        }
+        
+        .hero-title{
+            font-size:clamp(60px,9vw,170px);
+            line-height:0.9;
+            font-weight:700;
+            margin-bottom:80px;
+        }
+        
+        .section{
+            padding:120px 8%;
+        }
+        
+        .section-title{
+            font-size:15px;
+            text-transform:uppercase;
+            letter-spacing:3px;
+            color:white;
+            margin-bottom:50px;
+        }
+        
+        .overview{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:80px;
+            align-items:center;
+        }
+        
+        .overview-text h2{
+            font-size:clamp(45px,6vw,90px);
+            line-height:1;
+            margin-bottom:30px;
+        }
+        
+        .overview-text p{
+            color:#c2c2c2;
+            line-height:2;
+            font-size:17px;
+            text-align:justify;
+            margin-bottom:20px;
+        }
+        
+        .overview-image img{
+            width:100%;
+            border-radius:30px;
+        }
+        
+        .features-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:30px;
+        }
+        
+        .feature-card{
+            background:#111;
+            padding:40px;
+            border-radius:25px;
+            transition:0.4s ease;
+            border:1px solid rgba(255,255,255,0.08);
+        }
+        
+        .feature-card:hover{
+            transform:translateY(-10px);
+        }
+        
+        .feature-card h3{
+            font-size:24px;
+            margin-bottom:20px;
+            text-align: center;
+        }
+        
+        .feature-card p{
+            color:white;
+            line-height:1.9;
+            font-size:18px;
+            text-align: justify;
+        }
+        
+        .feature-card ul{
+            padding-left:25px;
+        }
+
+        .feature-card li{
+            margin-bottom:12px;
+            line-height:1.8;
+            font-size:18px;
+        }
+        
+        .gallery{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:30px;
+        }
+        
+        .gallery img{
+            width:100%;
+            border-radius:25px;
+            transition:0.5s ease;
+            cursor:pointer;
+        }
+        
+        .gallery img:hover{
+            transform:scale(1.03);
+        }
+
+        .back-btn{
+            display:block;
+            width:fit-content;
+            margin-top:90px;
+            margin-left:auto;
+            padding:18px 35px;
+            background:white;
+            color:black;
+            border-radius:100px;
+            text-decoration:none;
+            transition:0.35s ease;
+            font-weight:600;
+        }
+        
+        .back-btn:hover{
+            transform:translateY(-5px);
+        }
+
+        .reveal{
+            opacity:0;
+            transform:translateY(80px);
+            transition:1s ease;
+        }
+        
+        .reveal.active{
+            opacity:1;
+            transform:translateY(0);
+        }
+        
+        @media(max-width:1000px){
+            
+            .overview{
+                grid-template-columns:1fr;
+            }
+            nav{
+                padding:25px;
+            }
+            .nav-links{
+                gap:15px;
+            }
+
+        }
+    
+        @media(max-width:700px){
+
+            .hero{
+                padding-top:150px;
+            }
+            .hero-title{
+                font-size:60px;
+            }
+            .section{
+                padding:100px 7%;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="grain"></div>
+
+    <nav>
+
+        <div class="logo">Gryffindor Medical Center</div>
+    
+        <div class="nav-links">
+            <button onclick="scrollToSection('overview')">Overview</button>
+            <button onclick="scrollToSection('features')">Features</button>
+            <button onclick="scrollToSection('gallery')">Gallery</button>
+        </div>
+    
+    </nav>
+    
+    <section class="hero">
+        
+        <div class="hero-content reveal">
+
+            <h1 class="hero-title">Gryffindor Medical Center</h1>
+
+        </div>
+    
+    </section>
+    
+    <section class="section" id="overview">
+
+        <div class="overview reveal">
+
+            <div class="overview-text">
+
+                <h2>GMC</h2>
+
+                <p>
+                    Gryffindor Medical Center is a leading healthcare facility which appreciates the values of audacity, resolve, and gallantry.
+                    It’s medical personnel, otherwise called ‘Gryffindors’ reflect the readiness of the center to deal with acute medical concerns.
+                </p>
+                
+                <p>
+                    "Gryffindor" as a name comes directly from Godric Gryffindor. The medical center aims to preserve his name by attempting to create an atmosphere that is favorable for medical innovation.
+                    The emblem of Gryffindor Medical Center contains a lion, one of the universal symbols of courage and bravery. It is a testimony to the center’s commitment to bold change and advocacy for patients.
+                    The center’s branding of gold and scarlet vividly portrays the passionate and relentless drive to achieve unparalleled standards of clinical excellence.
+                </p>
+            
+            </div>
+
+            <div class="overview-image">
+
+                <img src="Gryffindor.png" alt="Overview">
+
+            </div>
+        </div>
+    
+    </section>
+    
+    <section class="section" id="features">
+        
+        <p class="section-title reveal">Core Features</p>
+        
+        <div class="features-grid">
+            
+            <div class="feature-card reveal">
+                <h3>Scope</h3>
+
+                <p>
+                    The Gryffindor Medical Center system focuses on six modules: Patient Management, Staff Management, Appointment Management, Facility Management, Inventory Management, and Accounting Management.
+                    The system includes built-in security features to ensure that all users, whether administrative or medical personnel, have log-in credentials. Each user will have a maximum of 3 login attempts to access their respective modules.
+                </p>
+            </div>
+            
+            <div class="feature-card reveal">
+                
+                <h3>Limitation</h3>
+                
+                <p>
+                    It is only designed for internal use only and does not support remote access outside the Gryffindor Medical Center.
+                </p>
+            </div>
+        </div>
+
+    </section>
+    
+    <section class="section" id="gallery">
+        
+        <p class="section-title reveal">UI Screens</p>
+        
+        <div class="gallery reveal">
+
+            <img src="1.png" alt="1">
+            <img src="2.png" alt="2">
+            <img src="3.png" alt="3">
+            <img src="4.png" alt="4">
+            <img src="5.png" alt="5">
+            <img src="6.png" alt="6">
+            <img src="7.png" alt="7">
+            <img src="8.png" alt="8">
+            <img src="9.png" alt="9">
+            <img src="10.png" alt="10">
+            <img src="11.png" alt="11">
+            <img src="12.png" alt="12">
+            <img src="13.png" alt="13">
+            <img src="14.png" alt="14">
+            <img src="15.png" alt="15">
+            <img src="16.png" alt="16">
+            <img src="17.png" alt="17">
+            <img src="18.png" alt="18">
+            <img src="19.png" alt="19">
+            <img src="20.png" alt="20">
+            <img src="21.png" alt="21">
+            <img src="22.png" alt="22">
+            <img src="23.png" alt="23">
+            <img src="24.png" alt="24">
+            <img src="25.png" alt="25">
+            <img src="26.png" alt="26">
+            <img src="27.png" alt="27">
+            <img src="28.png" alt="28">
+            <img src="29.png" alt="29">
+            <img src="30.png" alt="30">
+            <img src="31.png" alt="31">
+            <img src="32.png" alt="32">
+            <img src="33.png" alt="33">
+            <img src="34.png" alt="34">
+            <img src="35.png" alt="35">
+            <img src="36.png" alt="36">
+            <img src="37.png" alt="37">
+            <img src="38.png" alt="38">
+            <img src="39.png" alt="39">
+            <img src="40.png" alt="40">
+            <img src="41.png" alt="41">
+            <img src="42.png" alt="42">
+            <img src="43.png" alt="43">
+            <img src="44.png" alt="44">
+            <img src="45.png" alt="45">
+            <img src="46.png" alt="46">
+        
+        </div>
+        
+        <a href="portfolio.html" class="back-btn">Back to Home</a>
+    </section>
+    
+    <script>
+    
+       function scrollToSection(id){
+            document.getElementById(id).scrollIntoView({
+             behavior:'smooth'
+            });
+        }
+        
+        const reveals = document.querySelectorAll('.reveal');
+        
+        function revealOnScroll(){
+            
+            reveals.forEach((element)=>{
+
+                const windowHeight = window.innerHeight;
+                const revealTop = element.getBoundingClientRect().top;
+                const revealPoint = 120;
+
+                if(revealTop < windowHeight - revealPoint){
+                    element.classList.add('active');
+                }
+
+            });
+
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+        
+    </script>
+</body>
+</html>

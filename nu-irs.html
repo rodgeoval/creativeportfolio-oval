@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NU-IRS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+ 
+ <style>
+  
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:'Poppins',sans-serif;
+      background:#111827;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    body::-webkit-scrollbar{
+      width:8px;
+    }
+
+    body::-webkit-scrollbar-thumb{
+      background:#444;
+      border-radius:10px;
+    }
+
+    .grain{
+      position:fixed;
+      inset:0;
+      background-image:url('https://www.transparenttextures.com/patterns/asfalt-light.png');
+      opacity:0.05;
+      pointer-events:none;
+      z-index:999;
+    }
+    
+    /* NAVBAR */
+
+    nav{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      padding:30px 50px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      z-index:1000;
+    }
+
+    .logo{
+      font-size:20px;
+      font-weight:700;
+      letter-spacing:1px;
+      color:white;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:35px;
+    }
+
+    .nav-links button{
+      background:transparent;
+      border:none;
+      color:white;
+      font-size:14px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      cursor:pointer;
+      position:relative;
+    }
+
+    .nav-links button::after{
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      width:0;
+      height:1px;
+      background:white;
+      transition:0.3s ease;
+    }
+
+    .nav-links button:hover::after{
+      width:100%;
+    }
+
+    /* HERO */
+
+    .hero{
+      min-height:100vh;
+      padding:180px 8% 100px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .hero-content{
+      width:100%;
+    }
+
+    .hero-title{
+      font-size:clamp(60px,9vw,170px);
+      line-height:0.9;
+      font-weight:700;
+      margin-bottom:80px;
+    }
+
+    /* SECTION */
+
+    .section{
+      padding:120px 8%;
+    }
+
+    .section-title{
+      font-size:15px;
+      text-transform:uppercase;
+      letter-spacing:3px;
+      color:white;
+      margin-bottom:50px;
+    }
+
+    /* OVERVIEW */
+
+    .overview{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:80px;
+      align-items:center;
+    }
+
+    .overview-text h2{
+      font-size:clamp(45px,6vw,90px);
+      line-height:1;
+      margin-bottom:30px;
+    }
+
+    .overview-text p{
+      color:#c2c2c2;
+      line-height:2;
+      font-size:17px;
+      text-align:justify;
+      margin-bottom:20px;
+    }
+
+    .overview-image img{
+      width:100%;
+      border-radius:30px;
+    }
+
+    /* FEATURES */
+
+    .features-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px;
+    }
+
+    .feature-card{
+      background:#111;
+      padding:40px;
+      border-radius:25px;
+      transition:0.4s ease;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+
+    .feature-card:hover{
+      transform:translateY(-10px);
+    }
+
+    .feature-card h3{
+      font-size:24px;
+      margin-bottom:20px;
+      text-align: center;
+    }
+
+    .feature-card p{
+      color:white;
+      line-height:1.8;
+      font-size:18px;
+    }
+
+    .feature-card ul{
+      padding-left:25px;
+    }
+    
+    .feature-card li{
+      margin-bottom:12px;
+      line-height:1.8;
+      font-size:18px;
+    }
+
+    /* GALLERY */
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:30px;
+    }
+
+    .gallery img{
+      width:100%;
+      border-radius:25px;
+      transition:0.5s ease;
+      cursor:pointer;
+    }
+
+    .gallery img:hover{
+      transform:scale(1.03);
+    }
+
+    /* BACK BUTTON */
+
+    .back-btn{
+      display:block;
+      width:fit-content;
+      margin-top:90px;
+      margin-left:auto;
+      padding:18px 35px;
+      background:white;
+      color:black;
+      border-radius:100px;
+      text-decoration:none;
+      transition:0.35s ease;
+      font-weight:600;
+    }
+
+    .back-btn:hover{
+      transform:translateY(-5px);
+    }
+
+    /* REVEAL */
+
+    .reveal{
+      opacity:0;
+      transform:translateY(80px);
+      transition:1s ease;
+    }
+
+    .reveal.active{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:1000px){
+
+      .overview{
+        grid-template-columns:1fr;
+      }
+
+      nav{
+        padding:25px;
+      }
+
+      .nav-links{
+        gap:15px;
+      }
+
+    }
+
+    @media(max-width:700px){
+
+      .hero{
+        padding-top:150px;
+      }
+
+      .hero-title{
+        font-size:60px;
+      }
+
+      .section{
+        padding:100px 7%;
+      }
+
+    }
+
+  </style>
+</head>
+<body>
+  
+  <div class="grain"></div>
+  
+  <nav>
+
+    <div class="logo">NU-IRS Lost and Found Application</div>
+
+    <div class="nav-links">
+    
+      <button onclick="scrollToSection('overview')">Overview</button>
+      <button onclick="scrollToSection('features')">Features</button>
+      <button onclick="scrollToSection('gallery')">Gallery</button>
+    </div>
+
+  </nav>
+   
+  <section class="hero">
+
+    <div class="hero-content reveal">
+
+      <h1 class="hero-title">
+        NU-IRS<br>
+        Lost and Found
+      </h1>
+
+    </div>
+
+  </section>
+
+  <section class="section" id="overview">
+
+    <div class="overview reveal">
+
+      <div class="overview-text">
+
+        <h2>NU-IRS</h2>
+
+        <p>
+          This application allows students at National University – MOA to file reports for items they have lost or found by filling out a form that will be posted for other users to see.
+          The app has both Admin and User interfaces. Admins are responsible for reviewing submitted forms and may either approve or reject them.
+          Once a form is approved, it becomes visible to all users. Users can submit reports and choose from the category button for missing items.
+          The form includes details such as the user's name, item name, description, location, and time. Items are categorized as valuables, non-valuables, and perishable items.
+        </p>
+
+        <p>
+          Overall, the application improves the efficiency of the processes and reduces the confusion, helping the National University – MOA community a lot more when it comes to the coordination of the lost and found items.
+        </p>
+
+      </div>
+
+      <div class="overview-image">
+        <img src="nu-irs main.png" alt="Overview">
+      </div>
+    </div>
+
+  </section>
+
+  <section class="section" id="features">
+
+    <p class="section-title reveal">Core Features</p>
+
+    <div class="features-grid">
+
+      <div class="feature-card reveal">
+        <h3>User Management</h3>
+
+        <ul>
+          <li>Access Control</li>
+          <li>Authentication</li>
+          <li>Feedback System</li>
+        </ul>
+      </div>
+
+      <div class="feature-card reveal">
+        <h3>Lost & Found Coordination</h3>
+
+        <ul>
+            <li>Post Management</li>
+            <li>Categorization</li>
+            <li>Location Tracking</li>
+        </ul>
+      </div>
+
+      <div class="feature-card reveal">
+        <h3>Admin Approval</h3>
+
+       <ul>
+          <li>Content Moderation</li>
+          <li>Status Management</li>
+          <li>Visibility Logic</li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+   
+  <section class="section" id="gallery">
+
+    <p class="section-title reveal">UI Screens</p>
+
+    <div class="gallery reveal">
+
+      <img src="AdminLoginPage.png" alt="AdminLoginPage">
+      <img src="AdminHomePage.png" alt="AdminHomePage">
+      <img src="AdminProfile.png" alt="AdminProfile">
+      <img src="admindashboard.png" alt="Admin Dashboard">
+      <img src="Approval - Pending.png" alt="Approval - Pending">
+      <img src="ReportApprovalPage.png" alt="ReportApprovalPage">
+      <img src="ReportFormPage.png" alt="ReportFormPage">
+      <img src="UserHomePage-PostDetails.png" alt="UserHomePage-PostDetails">
+      <img src="UserHomePage.png" alt="UserHomePage">
+      <img src="UserProfile.png" alt="UserProfile">
+      <img src="UserSignUpPage.png" alt="UserSignUpPage">
+
+    </div>
+
+    <a href="portfolio.html" class="back-btn">
+      Back to Home
+    </a>
+
+  </section>
+
+  <script>
+
+    function scrollToSection(id){
+
+      document.getElementById(id).scrollIntoView({
+        behavior:'smooth'
+      });
+
+    }
+
+    const reveals = document.querySelectorAll('.reveal');
+
+    function revealOnScroll(){
+
+      reveals.forEach((element)=>{
+
+        const windowHeight = window.innerHeight;
+        const revealTop = element.getBoundingClientRect().top;
+        const revealPoint = 120;
+
+        if(revealTop < windowHeight - revealPoint){
+          element.classList.add('active');
+        }
+
+      });
+
+    }
+
+    window.addEventListener('scroll', revealOnScroll);
+
+    revealOnScroll();
+
+  </script>
+</body>
+</html>
